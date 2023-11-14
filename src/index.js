@@ -12,7 +12,7 @@ app.use(todoRouter);
 // A partir de este punto y gracias a la linea escrita mas arriba, si llega alguna peticion que empieze
 // por /todo, está se redirige hacia todoRouter.
 
-const port = 3000;
+const port = 3001;
 app.listen(port, () => {
   console.log(`Server is up and running in port ${port}`);
 });
