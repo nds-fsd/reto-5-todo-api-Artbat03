@@ -45,7 +45,7 @@ const postTodo = (req, res) => {
     */
   const setId = () => {
     let newId = 0;
-    todos.forEach((todo, i) => {
+    todos.forEach((todo) => {
       if (!todos.includes(todo.id)) {
         newId = todo.id + 1;
         return newId;
