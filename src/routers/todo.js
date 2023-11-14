@@ -28,20 +28,17 @@ todoRouter.post("/todo", (req, res) => {
   Request y meterlos dentro de el array.
   El nuevo objeto debe tener como id un numero mas que el numero actual de elementos guardados en el array.
   */
-
-  //! REVISAR ESTO
   const setId = () => {
     let newId = 0;
     todos.forEach((todo, i) => {
-      if (!todos.includes(newId)) {
-        console.log(`task: ${(todo, todo.id)} index: ${i}`);
-        newId++;
+      if (!todos.includes(todo.id)) {
+        console.log(`task: ${todo.text}, ${todo.id} index: ${i}`);
+        newId = todo.id + 1;
         return newId;
       }
     });
     return newId;
   };
-  //! HASTA AQUÍ
 
   const newTodo = {
     id: setId(),
@@ -82,7 +79,7 @@ todoRouter.get("/todo/:id", (req, res) => {
   Si no hemos econtrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404. 
   */
   if (!specificTodo) {
-    res.status.send(404);
+    res.status(404).json({ error: "Todo not found" });
   } else {
     res.status(200).json(specificTodo);
   }
@@ -99,6 +96,7 @@ todoRouter.patch("/todo/:id", (req, res) => {
   */
   const id = parseInt(req.params.id);
   const todo = todos.find((t) => t.id === id);
+  const { body } = req;
 
   /* Si existe, lo ACTUALIZAMOS con los datos del BODY de la Request y lo devolvemos como formato JSON y codigo
   de status 200.
@@ -107,9 +105,9 @@ todoRouter.patch("/todo/:id", (req, res) => {
   if (!todo) {
     return res.status(404).json({ error: "Todo not found" });
   } else {
-    todo.text = req.body.text || todo.text;
-    todo.fecha = req.body.fecha || new Date();
-    todo.done = req.body.done || todo.done;
+    todo.text = body.text || todo.text;
+    todo.fecha = body.fecha || new Date();
+    todo.done = body.done || todo.done;
     res.json(todo);
   }
 });
@@ -132,7 +130,7 @@ todoRouter.delete("/todo/:id", (req, res) => {
   Si no hemos econtrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404.
   */
   if (specificTodo === -1) {
-    res.status(404).send();
+    res.status(404).json({ error: "Todo not found" });
   } else {
     todos.splice(specificTodo, 1);
     res.status(200).json(todos);
