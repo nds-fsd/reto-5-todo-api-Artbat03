@@ -57,7 +57,9 @@ const postTodo = (req, res) => {
   const newTodo = {
     id: setId(),
     text: req.body.text,
-    fecha: req.body.fecha || new Date(),
+    fecha:
+      req.body.fecha ||
+      `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`,
     done: req.body.done || false,
     color: req.body.color || "yellow"
   };
