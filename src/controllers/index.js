@@ -58,7 +58,8 @@ const postTodo = (req, res) => {
     id: setId(),
     text: req.body.text,
     fecha: req.body.fecha || new Date(),
-    done: req.body.done || false
+    done: req.body.done || false,
+    color: req.body.color || "yellow"
   };
 
   if (newTodo.text === undefined || newTodo.text === "") {
@@ -91,6 +92,7 @@ const updateATodo = (req, res) => {
     todo.text = body.text || todo.text;
     todo.fecha = body.fecha || new Date();
     todo.done = body.done || todo.done;
+    todo.color = body.color || todo.color;
     res.json(todo);
   }
 };

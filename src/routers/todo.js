@@ -22,19 +22,19 @@ categoryRouter.
 const todoRouter = express.Router();
 
 //^ GET all todo
-todoRouter.get("/todo", getAllTodos);
+todoRouter.get("/todos", getAllTodos);
 
 //// POST a new todo
-todoRouter.post("/todo", postTodo);
+todoRouter.post("/todos", postTodo);
 
 //^ GET a task with ID
-todoRouter.get("/todo/:id", getTodoById);
+todoRouter.get("/todos/:id", getTodoById);
 
 //> UPDATE a todo
-todoRouter.patch("/todo/:id", updateATodo);
+todoRouter.patch("/todos/:id", updateATodo);
 
 //! DELETE a todo
-todoRouter.delete("/todo/:id", removeATodo);
+todoRouter.delete("/todos/:id", removeATodo);
 
 // Exportamos el router para poder 'usarlo' en nuestra app.
 module.exports = todoRouter;
