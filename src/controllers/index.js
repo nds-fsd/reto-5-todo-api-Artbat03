@@ -92,7 +92,7 @@ const updateATodo = (req, res) => {
     return res.status(404).json({ error: "Todo not found" });
   } else {
     todo.text = body.text || todo.text;
-    todo.fecha = body.fecha || new Date();
+    todo.fecha = body.fecha || todo.fecha;
     todo.done = body.done || todo.done;
     todo.color = body.color || todo.color;
     res.json(todo);
