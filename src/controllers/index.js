@@ -2,7 +2,15 @@ const { todos } = require("../data/data");
 
 const getAllTodos = (req, res) => {
   // Devolver todos los "todos" que hay en el array con formato JSON.
-  res.json(todos);
+  try {
+    if (todos.length === 0) {
+      return res.status(200).json([]);
+    } else {
+      return res.status(200).json(todos);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /* En este endpoint, el path contiene una variable llamada id. La syntaxis que utiliza express para estos casos
