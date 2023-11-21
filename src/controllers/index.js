@@ -31,7 +31,7 @@ const getTodoById = (req, res) => {
     Si no hemos econtrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404. 
     */
   if (!specificTodo) {
-    res.status(404).json({ error: "Todo not found" });
+    res.status(404).json({ error: "Todo not found." });
   } else {
     res.status(200).json(specificTodo);
   }
@@ -65,7 +65,7 @@ const postTodo = (req, res) => {
   };
 
   if (newTodo.text === undefined || newTodo.text === "") {
-    res.status(404).json({ error: "Unable to create task without a title." });
+    res.status(404).json({ error: "Unable to create task without a text." });
   } else {
     todos.push(newTodo);
     res.status(201).json(todos);
@@ -89,7 +89,7 @@ const updateATodo = (req, res) => {
     Si no hemos econtrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404.
     */
   if (!todo) {
-    return res.status(404).json({ error: "Todo not found" });
+    return res.status(404).json({ error: "Todo not found." });
   } else {
     todo.text = body.text || todo.text;
     todo.fecha = body.fecha || todo.fecha;
@@ -116,10 +116,10 @@ const removeATodo = (req, res) => {
     Si no hemos econtrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404.
     */
   if (specificTodo === -1) {
-    res.status(404).json({ error: "Todo not found" });
+    res.status(404).json({ error: "Todo not found." });
   } else {
     todos.splice(specificTodo, 1);
-    res.status(200).json(todos);
+    res.status(200).json({ message: "Deleted todo." });
   }
 };
 
