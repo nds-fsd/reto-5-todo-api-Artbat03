@@ -93,7 +93,7 @@ const updateATodo = (req, res) => {
   } else {
     todo.text = body.text || todo.text;
     todo.fecha = body.fecha || todo.fecha;
-    todo.done = body.done || todo.done;
+    todo.done = body.done || !todo.done;
     todo.color = body.color || todo.color;
     res.json(todo);
   }
