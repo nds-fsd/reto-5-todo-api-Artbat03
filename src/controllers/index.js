@@ -1,5 +1,7 @@
 const { todos } = require("../data/data");
 
+const todosKeys = ["done", "fecha", "text", "color"];
+
 const getAllTodos = (req, res) => {
   // Devolver todos los "todos" que hay en el array con formato JSON.
   try {
@@ -99,10 +101,12 @@ const updateATodo = (req, res) => {
   if (!todo) {
     return res.status(404).json({ error: "Todo not found." });
   } else {
-    todo.text = body.text || todo.text;
-    todo.fecha = body.fecha || todo.fecha;
-    todo.done = body.done || !todo.done;
-    todo.color = body.color || todo.color;
+    Object.entries(body).forEach(([key, value]) => {
+      if (todosKeys.includes(key)) {
+        todo[key] = value;
+      }
+    });
+
     res.json(todo);
   }
 };
