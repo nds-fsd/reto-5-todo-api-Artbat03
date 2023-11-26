@@ -77,6 +77,11 @@ const postTodo = (req, res) => {
   if (newTodo.text === undefined || newTodo.text === "") {
     res.status(404).json({ error: "Unable to create task without a text." });
   } else {
+    Object.entries(req.body).forEach(([key, value]) => {
+      if (todosKeys.includes(key)) {
+        newTodo[key] = value;
+      }
+    });
     todos.push(newTodo);
     res.status(201).json(todos);
   }
